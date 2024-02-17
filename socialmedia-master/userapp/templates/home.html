@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+{%block bodyblock%}
+
+<div class="container bg-dark">
+    <div class="text-secondary text-center mt-5">
+        
+        {%if request.user.profile%}
+        <div class="d-flex justify-content-evenly">
+            <div class="d-flex justify-content-center">
+                <div class="box d-flex justify-content-center align-items-center rounded shadow" style="background-image: url(https://i.pinimg.com/564x/7b/05/d9/7b05d98d349da4776af5aef10519bedb.jpg);
+                background-size: 100%;">
+                    <a href="{%url 'index'%}" class="text-light text-decoration-none fs-3 ms-2">following's posts</a>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div class="box d-flex justify-content-center align-items-center rounded shadow" style="background-image: url(https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg);
+                background-size: 100%;">
+                    <a href="{%url 'profile'%}" class="text-light text-decoration-none fs-3 ms-2">profile</a>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div class="box d-flex justify-content-center align-items-center rounded shadow" style="background-image: url(https://i.pinimg.com/736x/78/6c/ec/786cecf39662f4692cd14ab5b9ca2fec.jpg);
+                background-size: 100%;">
+                    <a href="{%url 'post-add'%}" class="text-light text-decoration-none fs-3 ms-2">add post</a>
+                </div>
+            </div>
+        </div>
+        {%else%}
+        <div class="d-flex justify-content-center">
+            <div class="box d-flex justify-content-center align-items-center rounded shadow" style="background-image: url(https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg);
+            background-size: 100%;">
+                <a href="{%url 'profile-add'%}" class="text-light text-decoration-none fs-3 ms-2">add profile</a>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+</div>
+
+{%endblock%}

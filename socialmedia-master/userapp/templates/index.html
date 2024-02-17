@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+
+{%block bodyblock%}
+
+<div class="container">
+    {%if post%}
+    {%for data in post%}
+    
+    <div class="card mx-auto my-5 bg-dark shadow" style="width: 30% ; ">
+        <div class="d-flex py-2 px-1">
+          <img src="{{data.user.profile.profile_picture.url}}" alt="" height="30px" width="30px" class="rounded-circle">
+          <h5 class="text-light ms-2"><a href="{%url 'user-detail' data.user.id%}" class="text-light text-decoration-none">{{data.user.username}}</a></h5>
+        </div>
+        <img src="{{data.post_image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text text-light">{{data.title}}</p>
+          
+          <div class="card-text">
+
+            {%if data in request.user.profile.liked_posts.all%}
+            
+              <a href="{%url 'likes-remove' data.id%}"><i class="fa-solid fa-heart fa-lg" style="color: #ff0000;"></i></a>
+            {%else%}
+              <a href="{%url 'post-like' data.id%}"><i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i></a>
+            {%endif%}
+
+            <a href="{%url 'comment-add' data.id%}"><i class="fa-regular fa-comment fa-lg ms-2" style="color: #ffffff;"></i></a>
+            <a href="{%url 'post-detail' data.id%}"><i class="fa-regular fa-eye fa-lg ms-2" style="color: #ffffff;"></i></a>
+            
+          </div>
+
+          <div class="card-text text-light">
+            
+           
+            
+            
+            
+          </div>
+        </div>
+      </div>
+
+    {%endfor%}
+    {%endif%}
+
+</div>
+
+{%endblock%}

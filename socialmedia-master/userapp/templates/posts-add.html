@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+
+{%block bodyblock%}
+
+<div class="container bg-dark">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            {%if form.errors%}
+            {%for f in forms%}
+            {{f.errors}}
+            {%endfor%}
+            {%endif%}
+            <h2 class="text-center text-light">ADD POST</h2>
+            <form action="" method="post" enctype="multipart/form-data" class="text-light">
+                {%csrf_token%}
+                <div class="mb-3">
+                    <div class="mb-3">
+                        {{form.post_image}}
+                      </div>
+                      <div class="mb-3">
+                        
+                        <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Title for post">
+                      </div>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary rounded">ADD</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+{%endblock%}

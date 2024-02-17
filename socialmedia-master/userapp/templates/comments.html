@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+
+
+{%block bodyblock%}
+
+<div class="container bg-dark">
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4  shadow rounded bg-dark">
+           <div class="m-3">
+                {%if comments%}
+                {%for comment in comments%}
+                <div class="d-flex mb-1">
+                    <span class="text-white me-auto">{{comment.text}}</span>
+                    <span class="text-white ms-auto">{{comment.user.username}}</span>
+                </div>
+                {%endfor%}
+                {%endif%}
+                <div class="mt-4">
+                    <form action="" method="post">
+                        {%csrf_token%}
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="text" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Comments</label>
+                          </div>
+                          
+                        <button type="submit" class="mt-2 btn btn-outline-secondary">add</button>
+                    </form>
+                </div>
+           </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+{%endblock%}

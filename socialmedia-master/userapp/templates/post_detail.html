@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+
+{%block bodyblock%}
+
+<div class="container">
+    {%if data%}
+    
+    <div class="card mx-auto my-5 bg-dark shadow" style="width: 30% ; ">
+        <div class="d-flex py-2 px-1">
+          <img src="{{data.user.profile.profile_picture.url}}" alt="" height="30px" width="30px" class="rounded-circle">
+          <h5 class="text-light ms-2"><a href="{%url 'user-detail' data.user.id%}" class="text-light text-decoration-none">{{data.user.username}}</a></h5>
+          {%if data.user == request.user%}
+          
+          
+          <div class="ms-auto me-2">
+            <a class="text-light text-decoration-none" href="{%url 'post-delete' data.id%}"><i class="fa-solid fa-trash "  style="color: #ffffff;"></i></a>
+          </div>                
+          
+          {%endif%}
+
+        </div>
+        <img src="{{data.post_image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text text-light">{{data.title}}</p>
+          <p class="card-text text-light">{{data.created_date|date}}</p>
+          <div class="card-text">
+
+            {%if request.user.profile%}
+            {%if data in request.user.profile.liked_posts.all%}
+            
+            <a href="{%url 'likes-remove' data.id%}"><i class="fa-solid fa-heart fa-lg" style="color: #ff0000;"></i></a>
+            {%else%}
+            <a href="{%url 'post-like' data.id%}"><i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i></a>
+            {%endif%}
+            {%endif%}
+
+            <a href="{%url 'comment-add' data.id%}"><i class="fa-regular fa-comment fa-lg ms-2" style="color: #ffffff;"></i></a>
+            
+          </div>
+
+          <div class="card-text text-light">
+            
+           
+            
+            
+            <div class="dropdown">
+              <button class="btn btn-dark dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              liked by
+              </button>
+              <ul class="dropdown-menu bg-dark">
+                {%if likes%}
+                {%for like in likes%}
+                <li><a class="dropdown-item text-light link-dark" href="{%url 'user-detail' like.user.id%}">{{like.user}}</a></li>
+                {%endfor%}
+                {%else%}
+                <li><h5 class="dropdown-item text-light">no likes</h5></li>
+                {%endif%}
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+    {%endif%}
+</div>
+
+{%endblock%}

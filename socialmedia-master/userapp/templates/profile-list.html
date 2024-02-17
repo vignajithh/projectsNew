@@ -1,0 +1,99 @@
+{%extends 'base.html'%}
+
+{%block bodyblock%}
+
+<div class="container bg-dark mt-2">
+
+    
+    {%if data%}
+    {%for d in data%}
+    <div class="card mb-3 border-0 bg-dark text-light" style="width: 100%;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {%if d.profile_picture%}
+            <img src="{{d.profile_picture.url}}" class="card-img-top rounded-circle ms-auto me-auto mt-3" alt="..." style="width: 85%; height: 305px;">
+            {%else%}
+            <div class="card-img-top rounded-circle bg-secondary ms-auto me-auto" style="width: 85%; height: 300px;"></div>
+            {%endif%}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body mt-4">
+            <h3 class="card-title">{{d.user.username}}</h3>
+              <div class="card-text mt-1">{{d.bio}}</div>
+              <div class="card-text mt-1">{{d.user.first_name}} {{d.user.last_name}}</div>
+              <div class="card-text mt-1">{{d.dob}}</div>
+              <div class="card-text mt-1 mb-2">{{d.phone}}</div>
+              
+              <div class="text-light mb-3 d-flex">
+                <div class="me-2 ">
+                  <button class="btn btn-dark mt-2">{{post|length}} posts</button>
+                </div>
+                <div class="dropdown ">
+                  <button class="btn btn-dark dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{following|length}} following
+                  </button>
+                  <ul class="dropdown-menu bg-dark overflow-y-scroll" style="height: 90px;">
+                    {%if following%}
+                    {%for follow in following%}
+                    <li><a class="dropdown-item text-light link-dark" href="{%url 'user-detail' follow.id%}">{{follow.username}}</a></li>
+                    {%endfor%}
+                    {%else%}
+                    <li><h5 class="dropdown-item text-light">no following</h5></li>
+                    {%endif%}
+                    
+                  </ul>
+                </div>
+                <div class=" ms-2 dropdown ">
+                  <button class="btn btn-dark dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{followers|length}} followers
+                  </button>
+                  <ul class="dropdown-menu bg-dark overflow-y-scroll" style="height: 90px;">
+                    {%if followers%}
+                    {%for follow in followers%}
+                    <li><a class="dropdown-item text-light link-dark" href="{%url 'user-detail' follow.id%}">{{follow.username}}</a></li>
+                    {%endfor%}
+                    {%else%}
+                    <li><span class="dropdown-item text-light">no followers</span></li>
+                    {%endif%}
+                    
+                  </ul>
+                </div>
+              </div>
+
+              <a href="{%url 'profile-change' d.id%}" class="btn btn-primary">Edit profile</a>
+              <a href="{%url 'post-add'%}" class="btn btn-primary rounded ms-2">add post</a>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+      {%else%}
+      <a href="{%url 'profile-add' %}" class="btn btn-primary rounded">Add profile</a>
+    {%endif%} 
+    
+</div>
+<div class="sticky-top bg-dark">
+  <hr class="bg-light" style="height: 5px;">
+  <h3 class="text-center text-light ">Posts</h3>
+  <hr class="bg-light" style="height: 5px;">
+</div>
+<div class="container bg-dark">
+  <div class="row">
+    {%if post%}
+  {%for pos in post%}
+    
+      <div class="col-4">
+        <a href="{%url 'post-detail' pos.id%}"><img src="{{pos.post_image.url}}" alt="" class="m-1" style="width: 100%; height: 300px;"></a>
+      </div>
+    
+  {%endfor%}
+  {%endif%}
+  </div>
+
+ <div class="mt-2">
+  
+ </div>
+</div>
+
+{%endblock%}
